@@ -1,0 +1,22 @@
+%=======================
+%Example input for parallel mutual information program
+% June 4, 2021
+
+%Description===========
+%nrow            	= The number of instances of the target dataset
+%ncol 	                = The number of variables of the target dataset
+%category  	        = The number of categories for all variables
+%i_col_target		= The index of the target variable. Note that indices of all variables are 1-indexed
+%i_selection	        = The number of selected variables, including the target variable
+%=======================
+
+INPUT INFORMATION
+nrow        	2000
+ncol            1000
+category        3
+i_col_target    1000
+i_selection     12
+END INPUT INFORMATION 
+
+
+
