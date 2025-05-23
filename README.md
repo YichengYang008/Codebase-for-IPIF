@@ -14,9 +14,17 @@ The MCAR mechanism indicates that the occurrence of missing data is completely i
 
 For linux
 
+```linux
 1. source /opt/intel/oneapi/setvars.sh
+```
+
+```linux
 2. mpiicc -std=c++11 -o main_MPI Unbiased_Missingness.cpp
+```
+
+```linux
 3. sbatch run.sbatch
+```
 
 ## MNAR
 
@@ -28,10 +36,17 @@ The MNAR mechanism is more complex, indicating that the occurrence of missing da
 
 For linux
 
+```linux
 1. source /opt/intel/oneapi/setvars.sh
-2. mpiicc -std=c++11 -o main_MPI Biased_Missingness.cpp
-3. sbatch run.sbatch
+```
 
+```linux
+2. mpiicc -std=c++11 -o main_MPI Biased_Missingness.cpp
+```
+
+```linux
+3. sbatch run.sbatch
+```
 
 # **Missing data imputation-UP-FHDI, GAIN,HI-VAE**
 
