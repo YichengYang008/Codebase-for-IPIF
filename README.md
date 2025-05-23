@@ -1,8 +1,8 @@
 # **Data preprocessing-Create missingness**
 
-Let $\textbf{U}(n,p)$ denote a complete real-world dataset, and its variables are indexed by $0,1,\dots,p-1$. In line 2 of Algorithm \ref{alg:IPIF}, split $\textbf{U}(n, p)$ as disjoint $\textbf{U}_1(0.7n, p)$ and $\textbf{U}_2(0.3n, p)$ such that $\textbf{U}_1 \cup \textbf{U}_2 = \textbf{U}$. 
+Let $\textbf{U}(n,p)$ denote a complete real-world dataset, and its variables are indexed by $0,1,\dots,p-1$. In line 2 of Algorithm, split $\textbf{U}(n, p)$ as disjoint $\textbf{U}_1(0.7n, p)$ and $\textbf{U}_2(0.3n, p)$ such that $\textbf{U}_1 \cup \textbf{U}_2 = \textbf{U}$. 
 
-To simulate missing data scenarios, two missing data mechanisms were adopted: MCAR and MNAR. Based on these, four different data availability levels—20%, 40%, 60%, and 80%—were set to create varying degrees of missingness.
+Create missingness to $\textbf{U}_1(0.7n, p)$ with different missing mechanisms, i.e., missing completely at random (MCAR) or missing not at random (MNAR)
 
 ## MCAR
 
@@ -34,6 +34,9 @@ For linux
 
 
 # **Missing data imputation-UP-FHDI, GAIN,HI-VAE**
+
+Cure incomplete data $\textbf{U}_1(0.7n, p)$ using different imputation techniques to obtain the cured data $\widehat{\textbf{U}}_1(0.7n, p)$.
+
 ## **UP-FHDI**
 
 Ultra data-oriented parallel fractional hot-deck imputation (UP-FHDI) is a general-purpose, assumption-free imputation software capable of curing big incomplete data with complex and irregular missing patterns. It inherits all the strengths of the _R_ Package FHDI. UP-FHDI can tackle datasets with up to one million instances, 10,000 variables, and 30% missing values.
