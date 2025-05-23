@@ -1,7 +1,36 @@
 # **Data preprocessing-Create missingness**
 
+Let $\textbf{U}(n,p)$ denote a complete real-world dataset, and its variables are indexed by $0,1,\dots,p-1$. In line 2 of Algorithm \ref{alg:IPIF}, split $\textbf{U}(n, p)$ as disjoint $\textbf{U}_1(0.7n, p)$ and $\textbf{U}_2(0.3n, p)$ such that $\textbf{U}_1 \cup \textbf{U}_2 = \textbf{U}$. 
 
+To simulate missing data scenarios, two missing data mechanisms were adopted: MCAR and MNAR. Based on these, four different data availability levels—20%, 40%, 60%, and 80%—were set to create varying degrees of missingness.
 
+## MCAR
+
+The MCAR mechanism indicates that the occurrence of missing data is completely independent of the observed data; in other words, the missing data are completely random.
+
+### Usage
+
+#### Command
+
+For linux
+
+1. source /opt/intel/oneapi/setvars.sh
+2. mpiicc -std=c++11 -o main_MPI Unbiased_Missingness.cpp
+3. sbatch run.sbatch
+
+## MNAR
+
+The MNAR mechanism is more complex, indicating that the occurrence of missing data is related not only to the observed data but also to the values of the missing data themselves. In real-world scenarios, data missingness often follows the MNAR mechanism.
+
+### Usage
+
+#### Command
+
+For linux
+
+1. source /opt/intel/oneapi/setvars.sh
+2. mpiicc -std=c++11 -o main_MPI Biased_Missingness.cpp
+3. sbatch run.sbatch
 
 
 # **Missing data imputation-UP-FHDI, GAIN,HI-VAE**
@@ -20,31 +49,15 @@ Ultra data-oriented parallel fractional hot-deck imputation (UP-FHDI) is a gener
 
 Please see a tutorial video in [UP-FHDI on HPC](https://www.youtube.com/watch?v=Dr0x5lZsVuU) to illustrate the use of UP-FHDI with example datasets.
 
-## Benchmarks
-Benchmarks with missing values are publicly accessible in [IEEE DataPort](https://ieee-dataport.org/open-access/incomplete-datasets-fhdi).
+### Usage
 
-| Dataset  | # Instances | # Variables | Missing rate |   Source |
-| :---: | :---: | :---: | :---: |  :---: |
-| Synthetic 1  | 100  | 80 | 30% | Synthetic |
-| Synthetic 2  | 10000  | 0.1M | 30% |  Synthetic |
-| Synthetic 3 | 0.1M  | 10000 | 30% | Synthetic |
-| Earthquake | 901512  | 15 | 30% | USGS |
-| Bridge Strain | 492641  | 31 | 30% | InTrans |
-| Travel Time | 23772  | 50 | 30% | IEEE DataPort |
-| CT Slices | 53500  | 380 | 30% | UCI |
-| Swarm | 24016 | 2400 | 30% | UCI |
-| p53 | 31159 | 5408 | 30% | UCI |
-| Radar | 325834 | 175 | 30% | UCI |
-
-## Usage
-
-### Dependencies
+#### Dependencies
 
 - Intel MPI
 - Access to HPC Facilities
 
 
-### Command
+#### Command
 UP-FHDI has been broadly validated on two high-performance computing (HPC) facilities: Condo2017 and Stampede2. Condo2017 is a free HPC platform open to Iowa State University faculties. Users can run the following commands to deploy UP-FHDI on Condo2017. 
 
 Load the Intel compiler:
@@ -76,7 +89,40 @@ sbatch run.sbatch
 
 Note that users should carefully investigate how to deploy UP-FHDI on other HPC facilities! 
 
-## Citation
+## **GAIN**
+
+GAIN (Generative Adversarial Imputation Nets) is a deep learning-based method designed to impute missing data by leveraging the Generative Adversarial Networks (GAN) framework. Introduced by Jinsung Yoon, James Jordon, and Mihaela van der Schaar in 2018, GAIN adapts GANs to the context of data imputation/ref.
+
+### Usage
+
+The detailed usage can be found in the README.md file in this folder.
+
+
+## **HI-VAE**
+
+Handling Incomplete Heterogeneous Data using VAEs refers to the use of Variational Autoencoders (VAEs) to model and impute datasets that contain both missing values and different types of variables, such as continuous, categorical, ordinal, and count data. This approach, often exemplified by the HI-VAE model, extends the standard VAE framework to support mixed data types and naturally handle missing entries during training. By learning a shared latent representation, VAEs can generate plausible imputations and improve downstream tasks like classification or clustering on incomplete and diverse datasets.
+
+### Usage
+
+The detailed usage can be found in the README.md file in this folder.
+
+
+# **Two-staged feature selection**
+
+
+# **Downstream predicitve models**
+
+The downstream predictive models include MLP, SVM, and Random Forest, which were applied to the SWARM, FMA, and COVID datasets, respectively. Except for the MLP model, which was configured with four hidden layers of sizes (50, 50, 50, 25), all other model parameters followed the default settings provided by the Python scikit-learn library.
+
+
+# **Dataset**
+| Dataset  | # Instances | # Variables |   Source |
+| :---: | :---: | :---: | :---: |
+| Swarm | 24016 | 2401 | UCI |
+| FMA | 106574 | 518 | UCI |
+| Covid | 1056661 | 768 | Kaggle |
+
+# Citation
 Please kindly cite the following papers if you find this software useful. Thanks!
 - Yicheng Yang, Yonghyun Kwon, Jaekwang Kim, and In Ho Cho, 2023. [Ultra data-oriented parallel fractional hot-deck imputation with efficient linearized variance estimation](https://ieeexplore.ieee.org/document/10054160),  _IEEE Transactions on Knowledge and Data Engineering_ (accepted).
 - Yicheng Yang, Jaekwang Kim, and In Ho Cho, 2020. [Parallel fractional hot-deck imputation and variance estimation for big incomplete data curing](https://ieeexplore.ieee.org/document/9214981), _IEEE Transactions on Knowledge and Data Engineering_ 34(8), 3912-3926 [DOI: 10.1109/TKDE.2020.3029146].
@@ -113,24 +159,22 @@ Please kindly cite the following papers if you find this software useful. Thanks
   pages = {140--154},
   doi = {10.32614/RJ-2018-020},
 }
+
+@Article{Yoon:2018,
+  author = {Jinsung Yoon and James Jordon and Mihaela van der Schaar},
+  title = {GAIN: Missing data imputation using generative adversarial nets},
+  journal = {35th International Conference on Machine Learning},
+  year = {2018},
+  pages = {5689--5698},
+}
+
+@Article{HI_VAE:2020,
+  author = {Alfredo Nazabal and Pablo M. Olmos and Zoubin Ghahramani and Isabel Valera},
+  title = {Handling Incomplete Heterogeneous Data using VAEs},
+  journal = {Pattern Recognition},
+  volume={107},
+  year={2020},
+  number={107501},
+}
+
 ```
-
-## Acknowledgements
-
-This software is supported by National Science Foundation
-(NSF) grant number OAC-1931380. The high-performance
-computing facility used for this research is partially supported
-by the HPC@ISU equipment at ISU, some of which have been
-purchased through funding provided by NSF CNS 1229081
-and CRI 1205413. Ultra data applications of this software used
-the Extreme Science and Engineering Discovery Environment
-(XSEDE), NSF ACI-1548562.
-
-# **Two-staged feature selection**
-
-
-# **Downstream predicitve models**
-
-
-# **Dataset**
-
