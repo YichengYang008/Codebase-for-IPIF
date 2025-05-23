@@ -127,6 +127,12 @@ The detailed usage can be found in the README.md file in this folder.
 
 # **Two-staged feature selection**
 
+Growing data volume will result in substantial training time for ML models. Dimension reduction is an essential technique to ease the model training process. Suppose we need to have a subset of $w$ features from $\textbf{U}_1(0.7n, p)$, $\widehat{\textbf{U}}_1(0.7n, p)$, and $\textbf{U}_2(0.3n, p)$ such that $w \ll p$. The IPIF utilizes the two-step feature selection method proposed in \cite{Yang:2023} for effective variable reduction in line 10 of Algorithm \ref{alg:IPIF}. 
+
+## Parallel MI
+
+
+## Glasso
 
 # **Downstream predicitve models**
 
