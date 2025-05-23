@@ -1,4 +1,11 @@
-# **UP-FHDI**
+# **Data preprocessing-Create missingness**
+
+
+
+
+
+# **Missing data imputation-UP-FHDI, GAIN,HI-VAE**
+## **UP-FHDI**
 
 Ultra data-oriented parallel fractional hot-deck imputation (UP-FHDI) is a general-purpose, assumption-free imputation software capable of curing big incomplete data with complex and irregular missing patterns. It inherits all the strengths of the _R_ Package FHDI. UP-FHDI can tackle datasets with up to one million instances, 10,000 variables, and 30% missing values.
 
@@ -13,7 +20,7 @@ Ultra data-oriented parallel fractional hot-deck imputation (UP-FHDI) is a gener
 
 Please see a tutorial video in [UP-FHDI on HPC](https://www.youtube.com/watch?v=Dr0x5lZsVuU) to illustrate the use of UP-FHDI with example datasets.
 
-# Benchmarks
+## Benchmarks
 Benchmarks with missing values are publicly accessible in [IEEE DataPort](https://ieee-dataport.org/open-access/incomplete-datasets-fhdi).
 
 | Dataset  | # Instances | # Variables | Missing rate |   Source |
@@ -29,15 +36,15 @@ Benchmarks with missing values are publicly accessible in [IEEE DataPort](https:
 | p53 | 31159 | 5408 | 30% | UCI |
 | Radar | 325834 | 175 | 30% | UCI |
 
-# Usage
+## Usage
 
-## Dependencies
+### Dependencies
 
 - Intel MPI
 - Access to HPC Facilities
 
 
-## Command
+### Command
 UP-FHDI has been broadly validated on two high-performance computing (HPC) facilities: Condo2017 and Stampede2. Condo2017 is a free HPC platform open to Iowa State University faculties. Users can run the following commands to deploy UP-FHDI on Condo2017. 
 
 Load the Intel compiler:
@@ -69,7 +76,7 @@ sbatch run.sbatch
 
 Note that users should carefully investigate how to deploy UP-FHDI on other HPC facilities! 
 
-# Citation
+## Citation
 Please kindly cite the following papers if you find this software useful. Thanks!
 - Yicheng Yang, Yonghyun Kwon, Jaekwang Kim, and In Ho Cho, 2023. [Ultra data-oriented parallel fractional hot-deck imputation with efficient linearized variance estimation](https://ieeexplore.ieee.org/document/10054160),  _IEEE Transactions on Knowledge and Data Engineering_ (accepted).
 - Yicheng Yang, Jaekwang Kim, and In Ho Cho, 2020. [Parallel fractional hot-deck imputation and variance estimation for big incomplete data curing](https://ieeexplore.ieee.org/document/9214981), _IEEE Transactions on Knowledge and Data Engineering_ 34(8), 3912-3926 [DOI: 10.1109/TKDE.2020.3029146].
@@ -108,7 +115,7 @@ Please kindly cite the following papers if you find this software useful. Thanks
 }
 ```
 
-# Acknowledgements
+## Acknowledgements
 
 This software is supported by National Science Foundation
 (NSF) grant number OAC-1931380. The high-performance
@@ -118,3 +125,12 @@ purchased through funding provided by NSF CNS 1229081
 and CRI 1205413. Ultra data applications of this software used
 the Extreme Science and Engineering Discovery Environment
 (XSEDE), NSF ACI-1548562.
+
+# **Two-staged feature selection**
+
+
+# **Downstream predicitve models**
+
+
+# **Dataset**
+
