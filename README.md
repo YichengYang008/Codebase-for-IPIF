@@ -127,16 +127,38 @@ The detailed usage can be found in the README.md file in this folder.
 
 # **Two-staged feature selection**
 
-Growing data volume will result in substantial training time for ML models. Dimension reduction is an essential technique to ease the model training process. Suppose we need to have a subset of $w$ features from $\textbf{U}_1(0.7n, p)$, $\widehat{\textbf{U}}_1(0.7n, p)$, and $\textbf{U}_2(0.3n, p)$ such that $w \ll p$. The IPIF utilizes the two-step feature selection method proposed in \cite{Yang:2023} for effective variable reduction. 
+Growing data volume will result in substantial training time for ML models. Dimension reduction is an essential technique to ease the model training process. Suppose we need to have a subset of $w$ features from $\textbf{U}_1(0.7n, p)$, $\widehat{\textbf{U}}_1(0.7n, p)$, and $\textbf{U}_2(0.3n, p)$ such that $w \ll p$. The IPIF utilizes the two-step feature selection method proposed for effective variable reduction. 
 
-The proposed feature selection method incorporates predictor-target correlations and inter-predictor correlations in a two-step process.Let $\textbf{y}_I = \{y_0,\dots, y_{p-2}\}$ as predictors and $y_{p-1}$ as the target variable. Discretize $\textbf{}_I$ to $\textbf{z}_I$ by categories $\boldsymbol{G}$ using the estimated sample quantiles. Similarly, discrete $y_{p-1}$ to $z_{p-1}$ by the category $G_{p-1}$. 
+The first step filters $v_I$ important features based on mutual information.
 
 The second step leverages graphical models based on the inverse covariance matrix (denoted as $\boldsymbol{\Sigma}^{-1}$) to further reduce $v_I$ features to a final small-sized subset of $w$ features. $\boldsymbol{\Sigma}^{-1}$ displays the partial correlations of variables, and zero elements imply the conditional independency given the rest. We adopt the R package $glasso$ for the estimation of a sparse $\boldsymbol{\Sigma}^{-1}$ using a lasso penalty. Note that users may skip this stage when data volume is moderate.
 
 ## Parallel MI
 
 
+
+### Usage
+
+For linux
+
+```linux
+1. source /opt/intel/oneapi/setvars.sh
+```
+
+```linux
+2. mpiicc -o main_MPI main_MPI.cpp
+```
+
+```linux
+3. sbatch run.sbatch
+```
+
 ## Glasso
+
+
+### Usage
+
+The detailed usage can be found in the Readme.txt file in this folder.
 
 # **Downstream predicitve models**
 
