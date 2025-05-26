@@ -129,13 +129,9 @@ The detailed usage can be found in the README.md file in this folder.
 
 Growing data volume will result in substantial training time for ML models. Dimension reduction is an essential technique to ease the model training process. Suppose we need to have a subset of $w$ features from $\textbf{U}_1(0.7n, p)$, $\widehat{\textbf{U}}_1(0.7n, p)$, and $\textbf{U}_2(0.3n, p)$ such that $w \ll p$. The IPIF utilizes the two-step feature selection method proposed for effective variable reduction. 
 
-The first step filters $v_I$ important features based on mutual information.
-
-The second step leverages graphical models based on the inverse covariance matrix (denoted as $\boldsymbol{\Sigma}^{-1}$) to further reduce $v_I$ features to a final small-sized subset of $w$ features. $\boldsymbol{\Sigma}^{-1}$ displays the partial correlations of variables, and zero elements imply the conditional independency given the rest. We adopt the R package $glasso$ for the estimation of a sparse $\boldsymbol{\Sigma}^{-1}$ using a lasso penalty. Note that users may skip this stage when data volume is moderate.
-
 ## Parallel MI
 
-
+The first step filters $v_I$ important features based on mutual information.
 
 ### Usage
 
@@ -155,6 +151,7 @@ For linux
 
 ## Glasso
 
+The second step leverages graphical models based on the inverse covariance matrix (denoted as $\boldsymbol{\Sigma}^{-1}$) to further reduce $v_I$ features to a final small-sized subset of $w$ features. $\boldsymbol{\Sigma}^{-1}$ displays the partial correlations of variables, and zero elements imply the conditional independency given the rest. We adopt the R package $glasso$ for the estimation of a sparse $\boldsymbol{\Sigma}^{-1}$ using a lasso penalty. Note that users may skip this stage when data volume is moderate.
 
 ### Usage
 
