@@ -56,12 +56,6 @@ Cure incomplete data $\textbf{U}_1(0.7n, p)$ using different imputation techniqu
 
 Ultra data-oriented parallel fractional hot-deck imputation (UP-FHDI) is a general-purpose, assumption-free imputation software capable of curing big incomplete data with complex and irregular missing patterns. It inherits all the strengths of the _R_ Package FHDI. UP-FHDI can tackle datasets with up to one million instances, 10,000 variables, and 30% missing values.
 
-- [Benchmarks](#Benchmarks)
-- [Usage](#Usage)
-  - [Dependencies](#Dependencies)
-  - [Command](#Command)
-- [Citation](#Citation)
-- [Acknowledgements](#Acknowledgements)
 
 
 
