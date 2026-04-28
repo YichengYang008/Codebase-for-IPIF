@@ -7,53 +7,68 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 import math
 
-#train
-train_UP_FHDI=pd.read_csv("data/final_daty_UP_FHDI_binary.csv",header=None)
-train_GAIN=pd.read_csv("data/imputed.txt",sep=" ",header=None)
-#train_GAIN=pd.read_csv("data/GAIN.csv",header=None)
-train_NAIVE=pd.read_csv("data/NAIVE.csv",header=None)
-train_DELETE=pd.read_csv("data/DELETE.csv",header=None)
-train_HI_VAE=pd.read_csv("data/model_HIVAE_inputDropout_fma_Missing20_1_z2_y5_s10_batch100_data_reconstruction.csv",header=None)
-train_original=pd.read_csv("data/0.7data.csv",header=None)
+# ======================
+# train
+# ======================
+train_UP_FHDI = pd.read_csv("data/final_daty_UP_FHDI_binary.csv", header=None)
+train_GAIN = pd.read_csv("data/imputed.txt", sep=" ", header=None)
+train_NAIVE = pd.read_csv("data/NAIVE.csv", header=None)
+train_DELETE = pd.read_csv("data/DELETE.csv", header=None)
+train_HI_VAE = pd.read_csv(
+    "data/model_HIVAE_inputDropout_fma_Missing20_1_z2_y5_s10_batch100_data_reconstruction.csv",
+    header=None
+)
+train_original = pd.read_csv("data/0.7data.csv", header=None)
 
+# ======================
+# 每个数据集用自己的标签
+# ======================
+X_UP_FHDI = train_UP_FHDI.iloc[:, :-1]
+Y_UP_FHDI = train_UP_FHDI.iloc[:, -1]
 
-Y=train_UP_FHDI.iloc[:,-1]
-Y_delete=train_DELETE.iloc[:,-1]
+X_GAIN = train_GAIN.iloc[:, :-1]
+Y_GAIN_train = train_GAIN.iloc[:, -1]
 
+X_NAIVE = train_NAIVE.iloc[:, :-1]
+Y_NAIVE_train = train_NAIVE.iloc[:, -1]
 
-train_UP_FHDI=train_UP_FHDI.iloc[:,:-1]
-train_NAIVE=train_NAIVE.iloc[:,:-1]
-train_DELETE=train_DELETE.iloc[:,:-1]
-train_GAIN=train_GAIN.iloc[:,:-1]
-train_HI_VAE=train_HI_VAE.iloc[:,:-1]
-train_original=train_original.iloc[:,:-1]
+X_DELETE = train_DELETE.iloc[:, :-1]
+Y_DELETE_train = train_DELETE.iloc[:, -1]
 
-n_features=train_UP_FHDI.shape[1]
+X_HI_VAE = train_HI_VAE.iloc[:, :-1]
+Y_HI_VAE_train = train_HI_VAE.iloc[:, -1]
 
+X_original = train_original.iloc[:, :-1]
+Y_original_train = train_original.iloc[:, -1]
 
-#test
-test=pd.read_csv("data/0.3data.csv",header=None)
-Y_true=test.iloc[:,-1]
-test=test.iloc[:,:-1]
+# ======================
+# test
+# ======================
+test = pd.read_csv("data/0.3data.csv", header=None)
+Y_true = test.iloc[:, -1].values
+test = test.iloc[:, :-1]
 
-#fix
-model_UP_FHDI=MLPRegressor(hidden_layer_sizes=(50, 50, 50,25),random_state=7)
-model_UP_FHDI.fit(train_UP_FHDI, Y)
+# ======================
+# 训练模型
+# ======================
+model_UP_FHDI = MLPRegressor(hidden_layer_sizes=(50, 50, 50,25),random_state=7)
+model_UP_FHDI.fit(X_UP_FHDI, Y_UP_FHDI)
 
-model_NAIVE=MLPRegressor(hidden_layer_sizes=(50, 50, 50,25),random_state=7)
-model_NAIVE.fit(train_NAIVE, Y)
+model_NAIVE = MLPRegressor(hidden_layer_sizes=(50, 50, 50,25),random_state=7)
+model_NAIVE.fit(X_NAIVE, Y_NAIVE_train)
 
-model_DELETE=MLPRegressor(hidden_layer_sizes=(50, 50, 50,25),random_state=7)
-model_DELETE.fit(train_DELETE, Y_delete)
+model_DELETE = MLPRegressor(hidden_layer_sizes=(50, 50, 50,25),random_state=7)
+model_DELETE.fit(X_DELETE, Y_DELETE_train)
 
-model_GAIN=MLPRegressor(hidden_layer_sizes=(50, 50, 50,25),random_state=7)
-model_GAIN.fit(train_GAIN, Y)
+model_GAIN = MLPRegressor(hidden_layer_sizes=(50, 50, 50,25),random_state=7)
+model_GAIN.fit(X_GAIN, Y_GAIN_train)
 
-model_HI_VAE=MLPRegressor(hidden_layer_sizes=(50, 50, 50,25),random_state=7)
-model_HI_VAE.fit(train_HI_VAE, Y)
+model_HI_VAE = MLPRegressor(hidden_layer_sizes=(50, 50, 50,25),random_state=7)
+model_HI_VAE.fit(X_HI_VAE, Y_HI_VAE_train)
 
-model_original=MLPRegressor(hidden_layer_sizes=(50, 50, 50,25),random_state=7)
-model_original.fit(train_original, Y)
+model_original = MLPRegressor(hidden_layer_sizes=(50, 50, 50,25),random_state=7)
+model_original.fit(X_original, Y_original_train)
+
 
 #pred
 Y_UP_FHDI = model_UP_FHDI.predict(test)
