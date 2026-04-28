@@ -63,55 +63,47 @@ Y_DELETE=model_DELETE.predict(test)
 Y_HI_VAE=model_HI_VAE.predict(test)
 Y_original = model_original.predict(test)
 
-#RMSE
+# RMSE
 sum1 = 0.0
 for i in range(len(Y_true)):
-    a = (Y_DELETE[i] - Y_true[i]) / len(Y_true)
-    b = a * a
-    sum1 += b
+    a = (Y_DELETE[i] - Y_true[i])
+    sum1 += a * a
+RMSE_delete = math.sqrt(sum1 / len(Y_true))
 
-RMSE_delete = math.sqrt(sum1)
 
 sum2 = 0.0
 for i in range(len(Y_true)):
-    c = (Y_NAIVE[i] - Y_true[i]) / len(Y_true)
-    d = c * c
-    sum2 += d
-
-RMSE_naive = math.sqrt(sum2)
+    c = (Y_NAIVE[i] - Y_true[i])
+    sum2 += c * c
+RMSE_naive = math.sqrt(sum2 / len(Y_true))
 
 
 sum3 = 0.0
 for i in range(len(Y_true)):
-    e = (Y_UP_FHDI[i] - Y_true[i]) / len(Y_true)
-    f = e * e
-    sum3 += f
+    e = (Y_UP_FHDI[i] - Y_true[i])
+    sum3 += e * e
+RMSE_UP_FHDI = math.sqrt(sum3 / len(Y_true))
 
-RMSE_UP_FHDI = math.sqrt(sum3)
 
 sum4 = 0.0
 for i in range(len(Y_true)):
-    g = (Y_GAIN[i] - Y_true[i]) / len(Y_true)
-    h = g * g
-    sum4 += h
+    g = (Y_GAIN[i] - Y_true[i])
+    sum4 += g * g
+RMSE_GAIN = math.sqrt(sum4 / len(Y_true))
 
-RMSE_GAIN = math.sqrt(sum4)
 
 sum5 = 0.0
 for i in range(len(Y_true)):
-    j = (Y_HI_VAE[i] - Y_true[i]) / len(Y_true)
-    k = j * j
-    sum5 += k
+    j = (Y_HI_VAE[i] - Y_true[i])
+    sum5 += j * j
+RMSE_HI_VAE = math.sqrt(sum5 / len(Y_true))
 
-RMSE_HI_VAE = math.sqrt(sum5)
 
 sum6 = 0.0
 for i in range(len(Y_true)):
-    l = (Y_original[i] - Y_true[i]) / len(Y_true)
-    m = l * l
-    sum6 += m
-
-RMSE_orignal = math.sqrt(sum6)
+    l = (Y_original[i] - Y_true[i])
+    sum6 += l * l
+RMSE_orignal = math.sqrt(sum6 / len(Y_true))
 
 print("MLP")
 print(RMSE_UP_FHDI)
