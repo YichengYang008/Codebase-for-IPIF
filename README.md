@@ -159,7 +159,7 @@ The downstream predictive models include MLP, SVM, and Random Forest, which were
 # **Dataset**
 | Dataset  | # Instances | # Variables |   Source |
 | :---: | :---: | :---: | :---: |
-| Swarm | 24016 | 2401 | UCI |
+| Swarm | 24017 | 2401 | UCI |
 | FMA | 106574 | 518 | UCI |
 | Covid | 1056661 | 768 | Kaggle |
 
